@@ -6,3 +6,4 @@ const opcionRespuestas = document.querySelector("#btn-respuestas")
 const contenedorGrafico = document.querySelector("#contenedor-grafico")
 const contenedorResultado = document.querySelector("#contenedor-resultados")
 
+const preguntasApi = 

@@ -7,3 +7,38 @@
 .esconder{
     display: none;
 }
+h1{
+    background-color: red;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", serif;
+}
+#contenedor{
+    background-color: aqua;
+    width: 1000px;
+    height: 600px;
+   
+}
+#pregunta{
+    background-color: green;
+    height: 50px;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", serif;
+}
+#btn-inicio{
+    background-color: blueviolet;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", serif;
+}
+.controles{
+    display: flex;
+    justify-content: center;
+}
