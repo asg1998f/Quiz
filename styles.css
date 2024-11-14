@@ -48,3 +48,14 @@ h1{
 .wrong{
     background-color: rgb(255, 0, 0);
 }
+#container-questions{
+    width: 400px;
+    height: 400px;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+}
+#container > #container-questions{
+    display: flex;
+    justify-content: center;
+}

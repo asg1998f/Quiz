@@ -7,26 +7,25 @@ const containerGraphic = document.querySelector("#container-graphic")
 const containerResults = document.querySelector("#contenedor-results")
 
 let questions = []
+let currentQuestionIndex = 0;
 
-const getQuestions = async() => {
+const getQuestions = async () => {
     const res = await axios.get(
-        "https://opentdb.com/api.php?amount=10&category=22&difficulty=hard&type=multiple"
-    )
+        "https://opentdb.com/api.php?amount=10&type=multiple&encode=base64"
+    );
     questions = res.data.results.map((questionObj) => {
-        let answers = [];
-        answers = questionObj.incorrect_answers.map((answer)=>{
-            return {text: answer, correct: false};
-        })
-        answers.push({text:questionObj.correct_answer, correct: true})
-        const newQuestion = {
+        let answers = questionObj.incorrect_answers.map((answer) => {
+            return { text: answer, correct: false };
+        });
+        answers.push({ text: questionObj.correct_answer, correct: true });
+        return {
             question: questionObj.question,
             answers,
         };
-        return newQuestion   
-});
+    });
 };
 
-let currentQuestionIndex = 0;
+
 
 function setStatusClass(element){
     if(element.dataset.correct){
@@ -37,7 +36,7 @@ function setStatusClass(element){
 };
 
 function selectAnswer(){
-    Array.from(answerButtonsElement.children).forEach((button)=>{
+    Array.from(optionAnswers.children).forEach((button)=>{
         setStatusClass(button);
     });
     if(questions.length > currentQuestionIndex +1){
@@ -49,8 +48,8 @@ function selectAnswer(){
 }
 
 function showQuestion (question) {
-    questionElement.innerText = question.question;
-    answerButtonsElement.innerHTML="";
+    eachQuestion.innerText = question.question;
+    optionAnswers.innerHTML="";
     question.answers.forEach((answer)=>{
         const button = document.createElement("button");
         button.innerText = answer.text;
@@ -58,7 +57,7 @@ function showQuestion (question) {
             button.dataset.correct = true;
         }
         button.addEventListener("click",selectAnswer);
-        answerButtonElement.append(button);
+        optionAnswers.append(button);
     });
 };
 
@@ -70,9 +69,8 @@ function setNextQuestion(){
 async function startGame(){
     beginButton.classList.add("hide");
     await getQuestions();
-    currentQuestionIndex=0;
-    containerQuestions.classList.remove("hide");
     setNextQuestion();
+    containerQuestions.classList.remove("hide");
 }
 beginButton.addEventListener("click",startGame);
 
