@@ -10,7 +10,7 @@ let questions = []
 
 const getQuestions = async() => {
     const res = await axios.get(
-        "https://opentdb.com/api.php?amount=10&type=multiple&encode=base64"
+        "https://opentdb.com/api.php?amount=10&category=22&difficulty=hard&type=multiple"
     )
     questions = res.data.results.map((questionObj) => {
         let answers = [];
@@ -24,10 +24,9 @@ const getQuestions = async() => {
         };
         return newQuestion   
 });
-getQuestions()
 };
 
-let currentQuestionIndex;
+let currentQuestionIndex = 0;
 
 function setStatusClass(element){
     if(element.dataset.correct){
@@ -51,6 +50,7 @@ function selectAnswer(){
 
 function showQuestion (question) {
     questionElement.innerText = question.question;
+    answerButtonsElement.innerHTML="";
     question.answers.forEach((answer)=>{
         const button = document.createElement("button");
         button.innerText = answer.text;
@@ -67,14 +67,21 @@ function setNextQuestion(){
     showQuestion(questions[currentQuestionIndex])
 }
 
-function startGame(){
+async function startGame(){
     beginButton.classList.add("hide");
+    await getQuestions();
     currentQuestionIndex=0;
     containerQuestions.classList.remove("hide");
     setNextQuestion();
 }
 beginButton.addEventListener("click",startGame);
+
 nextButton.addEventListener("click",() => {
     currentQuestionIndex++;
-    setNextQuestion;
+if(currentQuestionIndex<questions.length){
+    setNextQuestion();
+}else{
+    containerQuestions.classList.add("hide");
+    containerResults.classList.remove("hide");
+}
 });
