@@ -23,12 +23,14 @@ h1{
 }
 #question{
     background-color: green;
-    height: 50px;
+    width: 300px;
+    height: 300px;
     font-size: large;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: "Montserrat", serif;
+    flex-wrap: wrap;
 }
 #btn-begin{
     background-color: blueviolet;
@@ -53,9 +55,11 @@ h1{
     height: 400px;
     background-color: blueviolet;
     display: flex;
-    justify-content: center;
 }
 #container > #container-questions{
     display: flex;
     justify-content: center;
+}
+#container-results {
+    margin-top: 20px;
 }

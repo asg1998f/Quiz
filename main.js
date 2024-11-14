@@ -5,26 +5,13 @@ const eachQuestion = document.querySelector("#question")
 const optionAnswers = document.querySelector("#btn-answers")
 const containerGraphic = document.querySelector("#container-graphic")
 const containerResults = document.querySelector("#contenedor-results")
+const correctAnswersElement = document.getElementById("correct-answers");
+const incorrectAnswersElement = document.getElementById("incorrect-answers");
 
 let questions = []
 let currentQuestionIndex = 0;
-
-/* const getQuestions = async () => {
-    const res = await axios.get(
-        "https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple"
-    );
-    questions = res.data.results.map((questionObj) => {
-        let answers = questionObj.incorrect_answers.map((answer) => {
-            return { text: answer, correct: false };
-        });
-        answers.push({ text: questionObj.correct_answer, correct: true });
-        return {
-            question: questionObj.question,
-            answers,
-        };
-    });
-    console.log(questions)
-}; */
+let correctAnswers = 0;
+let incorrectAnswers = 0;
 
 const getQuestions = async () => {
     try {
@@ -59,27 +46,19 @@ function setStatusClass(element){
     }
 };
 
- function selectAnswer(){
-    Array.from(optionAnswers.children).forEach((button)=>{
-        setStatusClass(button);
+function selectAnswer(event) {
+    const selectedButton = event.target;
+    Array.from(optionAnswers.children).forEach((button) => {
+        setStatusClass(button); 
+        button.disabled = true;  
     });
-    if(questions.length > currentQuestionIndex +1){
-        nextButton.classList.remove("hide");
-    }else{
-        beginButton.innerText = "Restart"
-        beginButton.classList.remove("hide")
+    if (selectedButton.dataset.correct === "true") {
+        correctAnswers++;
+    } else {
+        incorrectAnswers++;
     }
- }
-  
-    
-    function setStatusClass(button) {
-        if (button.dataset.correct) {
-            button.classList.add("correct");
-        } else {
-            button.classList.add("wrong");
-        }
-    }
-    
+    nextButton.classList.remove("hide");
+}
 
     function showQuestion (question) {
     eachQuestion.innerText = question.question;
@@ -120,7 +99,9 @@ nextButton.addEventListener("click", () => {
     if (currentQuestionIndex < questions.length) {
         setNextQuestion(); 
     } else {
-        containerQuestions.classList.add("hide");
-        containerResults.classList.remove("hide");
+        showResults();
     }
 });
+
+
+
