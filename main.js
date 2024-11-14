@@ -66,3 +66,10 @@ function setNextQuestion(){
     resetState();
     showQuestion(questions[currentQuestionIndex])
 }
+
+function startGame(){
+    beginButton.classList.add("hide");
+    currentQuestionIndex=0;
+    containerQuestions.classList.remove("hide");
+    setNextQuestion();
+}
