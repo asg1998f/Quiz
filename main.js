@@ -73,3 +73,8 @@ function startGame(){
     containerQuestions.classList.remove("hide");
     setNextQuestion();
 }
+beginButton.addEventListener("click",startGame);
+nextButton.addEventListener("click",() => {
+    currentQuestionIndex++;
+    setNextQuestion;
+});
