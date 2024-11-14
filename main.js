@@ -61,3 +61,8 @@ function showQuestion (question) {
         answerButtonElement.append(button);
     });
 };
+
+function setNextQuestion(){
+    resetState();
+    showQuestion(questions[currentQuestionIndex])
+}
