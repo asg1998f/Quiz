@@ -27,6 +27,14 @@ const getQuestions = async() => {
 getQuestions()
 };
 
+function setStatusClass(element){
+    if(element.dataset.correct){
+        element.classList.add("correct");
+    }else{
+        element.classList.add("wrong");
+    }
+}
+
 function showQuestion (question) {
     questionElement.innerText = question.question;
     question.answers.forEach((answer)=>{

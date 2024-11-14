@@ -42,3 +42,9 @@ h1{
     display: flex;
     justify-content: center;
 }
+.correct{
+    background-color: rgb(14, 189, 29);
+}
+.wrong{
+    background-color: rgb(255, 0, 0);
+}
