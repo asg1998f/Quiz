@@ -27,11 +27,25 @@ const getQuestions = async() => {
 getQuestions()
 };
 
+let currentQuestionIndex;
+
 function setStatusClass(element){
     if(element.dataset.correct){
         element.classList.add("correct");
     }else{
         element.classList.add("wrong");
+    }
+};
+
+function selectAnswer(){
+    Array.from(answerButtonsElement.children).forEach((button)=>{
+        setStatusClass(button);
+    });
+    if(questions.length > currentQuestionIndex +1){
+        nextButton.classList.remove("hide");
+    }else{
+        beginButton.innerText = "Restart"
+        beginButton.classList.remove("hide")
     }
 }
 
