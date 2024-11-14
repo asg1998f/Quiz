@@ -27,3 +27,15 @@ const getQuestions = async() => {
 getQuestions()
 };
 
+function showQuestion (question) {
+    questionElement.innerText = question.question;
+    question.answers.forEach((answer)=>{
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        if(answer.correct === true){
+            button.dataset.correct = true;
+        }
+        button.addEventListener("click",selectAnswer);
+        answerButtonElement.append(button);
+    });
+};
