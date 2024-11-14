@@ -86,22 +86,28 @@ function resetState() {
     optionAnswers.classList.remove("hide");
 }
 
-async function startGame(){
+async function startGame() {
     beginButton.classList.add("hide");
     await getQuestions();
     setNextQuestion();
     containerQuestions.classList.remove("hide");
 }
-beginButton.addEventListener("click",startGame);
+
+const showResults = () => {
+    containerQuestions.classList.add("hide");
+    containerResults.classList.remove("hide");
+    correctAnswersElement.innerText = `Respuestas correctas: ${correctAnswers}`;
+    incorrectAnswersElement.innerText = `Respuestas incorrectas: ${incorrectAnswers}`;
+};
+
+beginButton.addEventListener("click", startGame);
 
 nextButton.addEventListener("click", () => {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
-        setNextQuestion(); 
+        setNextQuestion();
     } else {
         showResults();
     }
 });
-
-
 
