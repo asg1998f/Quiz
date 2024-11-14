@@ -4,7 +4,7 @@
     box-sizing: border-box;
     text-decoration: none;
 }
-.esconder{
+.hide{
     display: none;
 }
 h1{
@@ -15,13 +15,13 @@ h1{
     align-items: center;
     font-family: "Montserrat", serif;
 }
-#contenedor{
+#container{
     background-color: aqua;
     width: 1000px;
     height: 600px;
    
 }
-#pregunta{
+#question{
     background-color: green;
     height: 50px;
     font-size: large;
@@ -30,7 +30,7 @@ h1{
     align-items: center;
     font-family: "Montserrat", serif;
 }
-#btn-inicio{
+#btn-begin{
     background-color: blueviolet;
     width: 100px;
     display: flex;
@@ -38,7 +38,7 @@ h1{
     align-items: center;
     font-family: "Montserrat", serif;
 }
-.controles{
+.controls{
     display: flex;
     justify-content: center;
 }

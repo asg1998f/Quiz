@@ -1,9 +1,29 @@
-const botonEmpezar = document.querySelector("#btn-inicio")
-const botonSiguiente = document.querySelector("#btn-siguiente")
-const contenedorPreguntas = document.querySelector("#contenedor-preguntas")
-const cadaPregunta = document.querySelector("#pregunta")
-const opcionRespuestas = document.querySelector("#btn-respuestas")
-const contenedorGrafico = document.querySelector("#contenedor-grafico")
-const contenedorResultado = document.querySelector("#contenedor-resultados")
+const beginButton = document.querySelector("#btn-begin")
+const nextButton = document.querySelector("#btn-next")
+const containerQuestions = document.querySelector("#contenedor-questions")
+const eachQuestion = document.querySelector("#question")
+const optionAnswers = document.querySelector("#btn-answers")
+const containerGraphic = document.querySelector("#container-graphic")
+const containerResults = document.querySelector("#contenedor-results")
 
-const preguntasApi = 
+let questions = []
+
+const getQuestions = async() => {
+    const res = await axios.get(
+        "https://opentdb.com/api.php?amount=10&type=multiple&encode=base64"
+    )
+    questions = res.data.results.map((questionObj) => {
+        let answers = [];
+        answers = questionObj.incorrect_answers.map((answer)=>{
+            return {text: answer, correct: false};
+        })
+        answers.push({text:questionObj.correct_answer, correct: true})
+        const newQuestion = {
+            question: questionObj.question,
+            answers,
+        };
+        return newQuestion   
+});
+getQuestions()
+};
+
