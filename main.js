@@ -91,6 +91,7 @@ async function startGame() {
     await getQuestions();
     setNextQuestion();
     containerQuestions.classList.remove("hide");
+    containerResults.classList.remove("hide");
 }
 
 const showResults = () => {
@@ -108,6 +109,7 @@ nextButton.addEventListener("click", () => {
         setNextQuestion();
     } else {
         showResults();
+        nextButton.classList.add("hide")
     }
 });
 
